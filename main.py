@@ -6,6 +6,7 @@ from openpyxl.utils.dataframe import dataframe_to_rows
 from openpyxl.styles import Alignment
 
 # Classifiers
+# List of all conditions (classifiers) to be checked in the reports
 CLASSIFIERS = [
     "pneumonia",
     "pulmonary_nodules",
@@ -30,6 +31,7 @@ CLASSIFIERS = [
     "vhs_v2",
 ]
 
+# Columns for the final output Excel sheet
 # Output columns
 OUTPUT_COLUMNS = [
     "condition",
@@ -53,6 +55,7 @@ def read_excel(input_path: Path) -> pd.DataFrame:
         print(f"Successfully read input: {input_path.name}")
         return df
     except Exception as e:
+        # Stop the program if reading fails
         print(f"Error reading file: {e}")
         sys.exit(1)
 
@@ -70,11 +73,7 @@ def count_classifiers(df: pd.DataFrame) -> pd.DataFrame:
     # Map columns safely
     col_map = {
         "true_positive": next(
-            (
-                c
-                for c in df.columns
-                if "true_positive" in c
-            ),
+            (c for c in df.columns if "true_positive" in c),
             None,
         ),
         "false_positive": next(
@@ -86,11 +85,7 @@ def count_classifiers(df: pd.DataFrame) -> pd.DataFrame:
             None
         ),
         "true_negative": next(
-            (
-                c
-                for c in df.columns
-                if "true_negative" in c
-            ),
+            (c for c in df.columns if "true_negative" in c),
             None,
         ),
         "false_negative": next(
@@ -108,6 +103,8 @@ def count_classifiers(df: pd.DataFrame) -> pd.DataFrame:
 
     result_rows = []
 
+    # Loop through each classifier and count its occurrences
+    # in each confusion matrix column
     for cond in CLASSIFIERS:
         tp = df["true_positive"].str.contains(
             cond, case=False, na=False).sum()
@@ -118,10 +115,10 @@ def count_classifiers(df: pd.DataFrame) -> pd.DataFrame:
         fn = df["false_negative"].str.contains(
             cond, case=False, na=False).sum()
 
-        result_rows.append(
-            [cond, tp, fp, tn, fn, "", "", "", "", "", ""]
-        )
+    # Append results for each condition
+        result_rows.append([cond, tp, fp, tn, fn, "", "", "", "", "", ""])
 
+    # Create final result DataFrame
     result_df = pd.DataFrame(result_rows, columns=OUTPUT_COLUMNS)
     return result_df
 
@@ -149,8 +146,8 @@ def write_excel_with_formulas(
         # Specificity formula
         ws[f"G{i}"] = f"=IFERROR(D{i}/(D{i}+C{i}),0)"
         # Format Sensitivity and Specificity columns as percentage
-        ws[f"F{i}"].number_format = '0.00%'
-        ws[f"G{i}"].number_format = '0.00%'
+        ws[f"F{i}"].number_format = "0.00%"
+        ws[f"G{i}"].number_format = "0.00%"
 
         # Check column formula: =SUM(true_Positive+false_Positive)
         ws[f"H{i}"] = f"=SUM(B{i}+C{i})"
@@ -178,11 +175,13 @@ def write_excel_with_formulas(
                     horizontal="center",
                     vertical="center")
 
+    # Save the Excel workbook
     wb.save(output_path)
     print(f"Output file created: {output_path}")
 
 
 def main():
+    """Main function to control workflow: read, process, and export data."""
     if len(sys.argv) < 2:
         print("Usage: python script.py <input_excel_path>")
         sys.exit(1)
@@ -192,9 +191,12 @@ def main():
         print(f"File not found: {input_path}")
         sys.exit(1)
 
+    # Step 1: Read input Excel
     df = read_excel(input_path)
+    # Step 2: Count classifier occurrences
     output_df = count_classifiers(df)
 
+    # Step 3: Write result file with formulas
     output_path = input_path.parent / "output_confusion_matrix.xlsx"
     write_excel_with_formulas(output_df, df, output_path)
 

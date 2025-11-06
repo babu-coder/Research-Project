@@ -43,18 +43,21 @@ OUTPUT_COLUMNS = [
 
 
 #  STEP 1 — LABEL TP/FP/TN/FN
+# DETERMIN CONDITION TO CHECK
 def label_predictions(df):
     conditions = [
         col.replace("_original", "")
         for col in df.columns
         if col.endswith("_original")
     ]
-
+# PREPARE COLUMNS
     df["true_positive"] = ""
     df["true_negative"] = ""
     df["false_positive"] = ""
     df["false_negative"] = ""
 
+
+# FOR EACH ROW, CHECK EACH CONDITION
     for i, row in df.iterrows():
         tp, tn, fp, fn = [], [], [], []
 
@@ -81,7 +84,8 @@ def label_predictions(df):
     return df
 
 
-# STEP 2 — CONFUSION MATRIX
+# CONFUSION MATRIX
+# Normalize column names (lowercase, underscores):
 def build_confusion(df):
     norm_df = df.copy()
     norm_df.columns = (
@@ -91,7 +95,7 @@ def build_confusion(df):
     )
 
     result_rows = []
-
+# Count occurrences per condition:
     for cond in CLASSIFIERS:
         tp = norm_df["true_positive"].str.contains(
             cond, case=False, na=False
@@ -118,26 +122,34 @@ def build_confusion(df):
     for r in dataframe_to_rows(cm_df, index=False, header=True):
         ws.append(r)
 
+# Excel formulas for Sensitivity (F) and Specificity (G) and other columns:
     for i in range(2, len(cm_df) + 2):
-        ws[f"F{i}"] = f"=IFERROR(B{i}/(B{i}+E{i}),0)"
-        ws[f"G{i}"] = f"=IFERROR(D{i}/(D{i}+C{i}),0)"
+        ws[f"F{i}"] = f"=IFERROR(B{i}/(B{i}+E{i}),0)"  # Sensitivity
+        ws[f"G{i}"] = f"=IFERROR(D{i}/(D{i}+C{i}),0)"  # Specificity
+        # Format Sensitivity and Specificity columns as percentage
         ws[f"F{i}"].number_format = "0.00%"
         ws[f"G{i}"].number_format = "0.00%"
+        # Check column formula: =SUM(true_Positive+false_Positive)
         ws[f"H{i}"] = (
             f"=SUM(B{i}+C{i})"
         )
+        # Positive Ground Truth formula: =SUM(B2:E2)
         ws[f"I{i}"] = f"=SUM(B{i}:E{i})"
+        # Negative Ground Truth formula: =SUM(D2:C2)
         ws[f"J{i}"] = f"=SUM(D{i}:C{i})"
+        # Ground Truth Check formula: =SUM(I2:J2)
         ws[f"K{i}"] = f"=SUM(I{i}:J{i})"
 
+# Creates a new Excel sheet named "Input Data
     ws_input = wb.create_sheet(title="Input Data")
+# DataFrame into row format that Excel understands
     for r in dataframe_to_rows(
         df,
         index=False,
         header=True
     ):
         ws_input.append(r)
-
+# Center-align cells in both sheets
     for sheet in [ws, ws_input]:
         for row in sheet.iter_rows():
             for cell in row:
@@ -145,12 +157,13 @@ def build_confusion(df):
                     horizontal="center",
                     vertical="center"
                 )
-
+#  Saves the final Excel file
     wb.save(CONFUSION_OUTPUT)
     print(f" Confusion matrix saved to {CONFUSION_OUTPUT}")
 
 
-#  MAIN Run
+#  MAIN Run AND Loads input Excel into DataFrame
+# check for input file existence AND print completion message
 def main():
     if not Path(INPUT_FILE).exists():
         print(f"Input not found: {INPUT_FILE}")
@@ -162,5 +175,6 @@ def main():
     print("\n All done — pipeline completed successfully!")
 
 
+# run script directly
 if __name__ == "__main__":
     main()

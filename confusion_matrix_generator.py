@@ -60,7 +60,7 @@ def read_excel(input_path: Path) -> pd.DataFrame:
 def normalize_columns(df: pd.DataFrame) -> pd.DataFrame:
     print("Normalizing column names...")
     df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
-    print("✔ Column normalization complete")
+    print("Column normalization complete")
     print(f"Columns Found: {list(df.columns)}")
     return df
 
@@ -82,7 +82,7 @@ def count_classifiers(df: pd.DataFrame) -> pd.DataFrame:
 
     for k, v in col_map.items():
         if v is None:
-            print(f"⚠ Warning: Column '{k}' not found! Creating empty field.")
+            print(f"Warning: Column '{k}' not found! Creating empty field.")
             df[k] = ""
         else:
             df[k] = df[v].fillna("").astype(str)

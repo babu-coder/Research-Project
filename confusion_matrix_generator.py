@@ -33,9 +33,9 @@ CLASSIFIERS = [
 OUTPUT_COLUMNS = [
     "condition",
     "true_Positive",
-    "false_Positive",
-    "true_Negative",
     "false_Negative",
+    "true_Negative",
+    "false_Positive",
     "Sensitivity",
     "Specificity",
     "Check",

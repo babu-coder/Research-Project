@@ -44,7 +44,7 @@ for col in required_cols:
 # ---------------- MODEL INIT ----------------
 llm = ChatGoogleGenerativeAI(
     model=MODEL_NAME,
-    temperature=0,
+    temperature=0.1,
     google_api_key=API_KEY
 )
 
@@ -70,50 +70,59 @@ batch_chain = RunnableSequence(batch_prompt_template | llm)
 
 
 # ---------------- DETECTION FUNCTION ----------------
+def _build_conditions_text(conditions):
+    lines = []
+    for c in conditions:
+        lines.append(f"- {c['condition']}: {c['prompt']}")
+    return "\n".join(lines)
+
+
+def _parse_response_text(text, known_conditions):
+    result = {}
+    for line in text.splitlines():
+        if ":" not in line:
+            continue
+        cond_name, val = line.split(":", 1)
+        cond_name = cond_name.strip().lower()
+        val = val.strip()
+        # Match to known condition
+        for c in known_conditions:
+            if cond_name in c.lower().replace("_", " "):
+                result[c] = val
+                break
+    # Fill missing with Negative
+    for c in known_conditions:
+        result.setdefault(c, "Negative")
+    return result
+
+
+def _is_quota_error(exc):
+    msg = str(exc)
+    return "429" in msg or "quota" in msg.lower()
+
+
 def detect_all_conditions(findings, conclusions, max_retries=MAX_RETRIES):
-    conditions_with_descriptions = "\n".join(
-        [f"- {c['condition']}: {c['prompt']}" for c in conditions_list]
-    )
+    conditions_with_descriptions = _build_conditions_text(conditions_list)
+    payload = {
+        "conditions_with_descriptions": conditions_with_descriptions,
+        "findings": str(findings),
+        "conclusions": str(conclusions),
+    }
 
     for attempt in range(max_retries):
         try:
-            response = batch_chain.invoke({
-                "conditions_with_descriptions": conditions_with_descriptions,
-                "findings": str(findings),
-                "conclusions": str(conclusions)
-            })
-
-            text = response.content.strip()
-            result_dict = {}
-
-            for line in text.splitlines():
-                if ":" in line:
-                    cond_name, val = line.split(":", 1)
-                    cond_name = cond_name.strip().lower()
-                    val = val.strip()
-                    # Match to known condition
-                    for c in CONDITIONS:
-                        if cond_name in c.lower().replace("_", " "):
-                            result_dict[c] = val
-                            break
-
-            # Fill missing
-            for c in CONDITIONS:
-                if c not in result_dict:
-                    result_dict[c] = "Negative"
-            return result_dict
-
+            response = batch_chain.invoke(payload)
+            text = getattr(response, "content", "").strip()
+            return _parse_response_text(text, CONDITIONS)
         except Exception as e:
-            msg = str(e)
-            if "429" in msg or "quota" in msg.lower():
+            if _is_quota_error(e):
                 print(f"Quota limit hit! Waiting 60s (attempt {attempt+1})...")
                 time.sleep(60)
                 continue
-            else:
-                print(f" Error: {e}")
-                return {c: "Error" for c in CONDITIONS}
+            print(f" Error: {e}")
+            return dict.fromkeys(CONDITIONS, "Error")
 
-    return {c: "Error (max retries)" for c in CONDITIONS}
+    return dict.fromkeys(CONDITIONS, "Error (max retries)")
 
 
 # ---------------- MAIN LOOP ----------------
@@ -121,7 +130,10 @@ progress = tqdm(total=len(df), desc="Processing Reports", ncols=100)
 
 for idx, row in df.iterrows():
     # Skip completed
-    if all(f"{c}_original" in df.columns and pd.notna(df.at[idx, f"{c}_original"]) for c in CONDITIONS):
+    if all(
+        f"{c}_original" in df.columns and pd.notna(df.at[idx, f"{c}_original"])
+        for c in CONDITIONS
+    ):
         progress.update(1)
         continue
 

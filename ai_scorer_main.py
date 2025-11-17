@@ -50,8 +50,8 @@ CLASSIFIERS = [
 
 # Output column structure
 OUTPUT_COLUMNS = [
-    "condition", "true_Positive", "false_Positive",
-    "true_Negative", "false_Negative", "Sensitivity",
+    "condition", "true_Positive", "false_Negative",
+    "true_Negative", "false_Positive", "Sensitivity",
     "Specificity", "Check", "Positive Ground Truth",
     "Negative Ground Truth", "Ground Truth Check"
 ]

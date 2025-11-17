@@ -1,9 +1,13 @@
 [
-  {
-    "condition": "perihilar_infiltrate",
-    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **perihilar infiltrates**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nIncreased soft tissue opacity centered around the perihilar region.\nConclusion:\nConsistent with perihilar infiltrates.\nAnswer: Positive\n\n# Example 2\nFindings:\nLungs are clear. No regional opacity around hilar area.\nConclusion:\nNormal study.\nAnswer: Negative\n\n# Example 3\nFindings:\nMinimal perihilar infiltrate explicitly reported.\nConclusion:\nConsistent with perihilar infiltrates.\nAnswer: Positive\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
+    {
+    "condition": "pulmonary_nodules",
+    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **pulmonary nodules**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nMultiple discrete nodules throughout lungs.\nConclusion:\nPulmonary nodules present.\nAnswer: Positive\n\n# Example 2\nFindings:\nNo nodular opacities.\nConclusion:\nNormal lung fields.\nAnswer: Negative\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
   },
   {
+    "condition": "esophagitis",
+    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **esophagitis**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nEsophageal wall thickening.\nConclusion:\nSuspicious for esophagitis.\nAnswer: Positive\n\n# Example 2\nFindings:\nEsophagus normal.\nConclusion:\nNo esophageal disease.\nAnswer: Negative\n\n# Example 3\nFindings:\nFaint increased opacity in caudal esophagus.\nConclusion:\nEsophagitis.\nAnswer: Positive\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
+  },
+    {
     "condition": "pneumonia",
     "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **pneumonia**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nPatchy alveolar pattern with air bronchograms.\nConclusion:\nFindings consistent with pneumonia.\nAnswer: Positive\n\n# Example 2\nFindings:\nNormal pulmonary parenchyma.\nConclusion:\nNo evidence of pneumonia.\nAnswer: Negative\n\n# Example 3\nFindings:\nAtelectasis or less likely, pneumonia.pneumonia mentioned as a differential.\nConclusion:\nPneumonia.\nAnswer: Positive\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
   },
@@ -25,74 +29,58 @@
   },
   {
     "condition": "cardiomegaly",
-    "prompt": "You are an expert veterinary radiologist.Be carefull you have keyword cardiomegaly and definition is misspelled or spelling mistake. Determine if the report indicates **cardiomegaly**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nEnlarged cardiac silhouette.\nConclusion:\nCardiomegaly.\nAnswer: Positive\n\n# Example 2\nFindings:\nNormal heart size.\nConclusion:\nNo enlargement.\nAnswer: Negative\n\n# Example 3\nFindings:\nMild cardiomegaly detected but heart failure not suspected.\nConclusion:\nCardiomegaly.\nAnswer: Positive\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
-  },
-  {
-    "condition": "pulmonary_nodules",
-    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **pulmonary nodules**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nMultiple discrete nodules throughout lungs.\nConclusion:\nPulmonary nodules present.\nAnswer: Positive\n\n# Example 2\nFindings:\nNo nodular opacities.\nConclusion:\nNormal lung fields.\nAnswer: Negative\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
+    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **cardiomegaly**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nEnlarged cardiac silhouette.\nConclusion:\nCardiomegaly.\nAnswer: Positive\n\n# Example 2\nFindings:\nNormal heart size.\nConclusion:\nNo enlargement.\nAnswer: Negative\n\n# Example 3\nFindings:\nMild cardiomegaly detected but heart failure not suspected.\nConclusion:\nCardiomegaly.\nAnswer: Positive\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
   },
   {
     "condition": "pleural_effusion",
     "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **pleural effusion**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nFluid opacity with lung lobe retraction.\nConclusion:\nPleural effusion noted.\nAnswer: Positive\n\n# Example 2\nFindings:\nNormal pleural space.\nConclusion:\nNo effusion.\nAnswer: Negative\n\n# Example 3\nFindings:\nPleural fissure lines or moderate–severe pleural effusion.\nConclusion:\nPleural effusion.\nAnswer: Positive\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
   },
-
   {
+    "condition": "perihilar_infiltrate",
+    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **perihilar infiltrates**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nIncreased soft tissue opacity centered around the perihilar region.\nConclusion:\nConsistent with perihilar infiltrates.\nAnswer: Positive\n\n# Example 2\nFindings:\nLungs are clear. No regional opacity around hilar area.\nConclusion:\nNormal study.\nAnswer: Negative\n\n# Example 3\nFindings:\nMinimal perihilar infiltrate explicitly reported.\nConclusion:\nConsistent with perihilar infiltrates.\nAnswer: Positive\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
+  },
+   {
     "condition": "rtm",
     "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **right middle lung lobe disease/collapse (RTM)**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nIncreased opacity in right middle lung lobe.\nConclusion:\nRight middle lobe involvement.\nAnswer: Positive\n\n# Example 2\nFindings:\nLungs are normal.\nConclusion:\nNo lobe disease.\nAnswer: Negative\n\n# Example 3\nFindings:\nMild dynamic airway disease; redundant tracheal membrane suggested.\nConclusion:\nRTM.\nAnswer: Positive\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
   },
-
   {
     "condition": "focal_caudodorsal_lung",
     "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **focal caudodorsal lung disease**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nSoft tissue opacity in caudodorsal lung.\nConclusion:\nFocal caudodorsal lesion.\nAnswer: Positive\n\n# Example 2\nFindings:\nCaudodorsal lung fields clear.\nConclusion:\nNormal.\nAnswer: Negative\n\n# Example 3\nFindings:\nInterstitial pattern involving caudodorsal lungs.\nConclusion:\nFocal caudodorsal lung disease.\nAnswer: Positive\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
   },
-
-  {
-    "condition": "focal_perihilar",
-    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **focal perihilar disease**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nPatchy opacity near perihilar area.\nConclusion:\nConsistent with perihilar disease.\nAnswer: Positive\n\n# Example 2\nFindings:\nNormal perihilar area.\nConclusion:\nNo focal changes.\nAnswer: Negative\n\n# Example 3\nFindings:\nFocal abnormality localized to right middle lung lobe.\nConclusion:\nFocal perihilar.\nAnswer: Positive\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
-  },
-
-  {
-    "condition": "pulmonary_hypoinflation",
-    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **pulmonary hypoinflation**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nReduced lung expansion with increased opacity.\nConclusion:\nHypoinflation present.\nAnswer: Positive\n\n# Example 2\nFindings:\nLungs fully expanded.\nConclusion:\nNo hypoinflation.\nAnswer: Negative\n\n# Example 3\nFindings:\nLungs described as mild–moderately hypoinflated.\nConclusion:\nPulmonary hypoinflation.\nAnswer: Positive\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
-  },
-
   {
     "condition": "right_sided_cardiomegaly",
     "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **right-sided cardiomegaly**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nRight heart border enlarged.\nConclusion:\nRight-sided enlargement.\nAnswer: Positive\n\n# Example 2\nFindings:\nSymmetric heart size.\nConclusion:\nNo enlargement.\nAnswer: Negative\n\n# Example 3\nFindings:\nEquivocal right atrial enlargement.\nConclusion:\nRight-sided cardiomegaly.\nAnswer: Positive\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
   },
-
   {
-    "condition": "pericardial_effusion",
-    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **pericardial effusion**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nGloboid cardiac silhouette.\nConclusion:\nPericardial effusion likely.\nAnswer: Positive\n\n# Example 2\nFindings:\nNormal heart shape.\nConclusion:\nNo effusion.\nAnswer: Negative\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
+    "condition": "focal_perihilar",
+    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **focal perihilar disease**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nPatchy opacity near perihilar area.\nConclusion:\nConsistent with perihilar disease.\nAnswer: Positive\n\n# Example 2\nFindings:\nNormal perihilar area.\nConclusion:\nNo focal changes.\nAnswer: Negative\n\n# Example 3\nFindings:\nFocal abnormality localized to right middle lung lobe.\nConclusion:\nFocal perihilar.\nAnswer: Positive\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
   },
-
-  {
-    "condition": "bronchiectasis",
-    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **bronchiectasis**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nDilated airways with thickened walls.\nConclusion:\nBronchiectasis.\nAnswer: Positive\n\n# Example 2\nFindings:\nNormal bronchial structures.\nConclusion:\nNo bronchiectasis seen.\nAnswer: Negative\n\n# Example 3\nFindings:\nDynamic airway disease may include airway collapse associated with bronchiectasis.\nConclusion:\nBronchiectasis.\nAnswer: Positive\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
-  },
-
-  {
-    "condition": "pulmonary_vessel_enlargement",
-    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **pulmonary vessel enlargement**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nEnlarged pulmonary arteries.\nConclusion:\nPulmonary vessel enlargement.\nAnswer: Positive\n\n# Example 2\nFindings:\nNormal vasculature.\nConclusion:\nNo enlargement.\nAnswer: Negative\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
-  },
-
   {
     "condition": "left_sided_cardiomegaly",
     "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **left-sided cardiomegaly**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nLeft heart border enlargement.\nConclusion:\nLeft-sided cardiomegaly.\nAnswer: Positive\n\n# Example 2\nFindings:\nNormal cardiac silhouette.\nConclusion:\nNo enlargement.\nAnswer: Negative\n\n# Example 3\nFindings:\nEquivocal left atrial enlargement.\nConclusion:\nLeft-sided cardiomegaly.\nAnswer: Positive\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
   },
-
+  {
+    "condition": "bronchiectasis",
+    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **bronchiectasis**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nDilated airways with thickened walls.\nConclusion:\nBronchiectasis.\nAnswer: Positive\n\n# Example 2\nFindings:\nNormal bronchial structures.\nConclusion:\nNo bronchiectasis seen.\nAnswer: Negative\n\n# Example 3\nFindings:\nDynamic airway disease may include airway collapse associated with bronchiectasis.\nConclusion:\nBronchiectasis.\nAnswer: Positive\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
+  },
+  {
+    "condition": "pulmonary_vessel_enlargement",
+    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **pulmonary vessel enlargement**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nEnlarged pulmonary arteries.\nConclusion:\nPulmonary vessel enlargement.\nAnswer: Positive\n\n# Example 2\nFindings:\nNormal vasculature.\nConclusion:\nNo enlargement.\nAnswer: Negative\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
+  },
   {
     "condition": "thoracic_lymphadenopathy",
     "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **thoracic lymphadenopathy**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nEnlarged cranial mediastinal lymph nodes.\nConclusion:\nLymphadenopathy.\nAnswer: Positive\n\n# Example 2\nFindings:\nNormal mediastinum.\nConclusion:\nNo lymph node enlargement.\nAnswer: Negative\n\n# Example 3\nFindings:\nCranial mediastinum mildly widened; differentials include lymphadenomegaly.\nConclusion:\nThoracic lymphadenopathy.\nAnswer: Positive\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
   },
-
   {
-    "condition": "esophagitis",
-    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **esophagitis**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nEsophageal wall thickening.\nConclusion:\nSuspicious for esophagitis.\nAnswer: Positive\n\n# Example 2\nFindings:\nEsophagus normal.\nConclusion:\nNo esophageal disease.\nAnswer: Negative\n\n# Example 3\nFindings:\nFaint increased opacity in caudal esophagus.\nConclusion:\nEsophagitis.\nAnswer: Positive\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
+    "condition": "pulmonary_hypoinflation",
+    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **pulmonary hypoinflation**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nReduced lung expansion with increased opacity.\nConclusion:\nHypoinflation present.\nAnswer: Positive\n\n# Example 2\nFindings:\nLungs fully expanded.\nConclusion:\nNo hypoinflation.\nAnswer: Negative\n\n# Example 3\nFindings:\nLungs described as mild–moderately hypoinflated.\nConclusion:\nPulmonary hypoinflation.\nAnswer: Positive\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
   },
-
   {
-    "condition": "vhs_v2",
-    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **elevated Vertebral Heart Score (VHS)**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nVHS measured at 12.0.\nConclusion:\nElevated VHS.\nAnswer: Positive\n\n# Example 2\nFindings:\nVHS within normal limits.\nConclusion:\nNormal.\nAnswer: Negative\n\n# Example 3\nFindings:\nVHS is 12.9, at the upper end.\nConclusion:\nElevated VHS.\nAnswer: Positive\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
+    "condition": "pericardial_effusion",
+    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **pericardial effusion**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nGloboid cardiac silhouette.\nConclusion:\nPericardial effusion likely.\nAnswer: Positive\n\n# Example 2\nFindings:\nNormal heart shape.\nConclusion:\nNo effusion.\nAnswer: Negative\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
+  },
+  {
+    "condition": "Fe_Alveolar",
+    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **Fe_Alveolar**.\nReturn only \"Positive\" or \"Negative\".\n\n### Examples:\n\n# Example 1\nFindings:\nair bronchograms, fluffy or soft opacities, and lobar distribution.\nConclusion:\nAlveolar likely.\nAnswer: Positive\n\n# Example 2\nFindings:\nNormal bronchograms.\nConclusion:\nNo Alveolar.\nAnswer: Negative\n\n### Report\nFindings:\n{findings}\n\nConclusion:\n{conclusions}\n\nAnswer:"
   }
 ]

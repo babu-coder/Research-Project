@@ -1,0 +1,40 @@
+[{
+ "condition": "gastritis",
+    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **gastritis**.\nReturn only \"Positive\" or \"Negative\"."
+},
+{
+ "condition": "ascites",
+    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **ascites**.\nReturn only \"Positive\" or \"Negative\"."
+},
+{
+ "condition": "colitis",
+    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **colitis**.\nReturn only \"Positive\" or \"Negative\"."
+},
+{
+ "condition": "liver_mass",
+    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **liver mass**.\nReturn only \"Positive\" or \"Negative\"."
+},
+{
+ "condition": "pancreatitis",
+    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **pancreatitis**.\nReturn only \"Positive\" or \"Negative\"."
+},
+{
+ "condition": "microhepatia",
+    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **microhepatia**.\nReturn only \"Positive\" or \"Negative\"."
+},
+{
+ "condition": "small_intestinal_obstruction",
+    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **small intestinal obstruction**.\nReturn only \"Positive\" or \"Negative\"."
+},
+{
+ "condition": "splenic_mass",
+    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **splenic mass**.\nReturn only \"Positive\" or \"Negative\"."
+},
+{
+ "condition": "splenomegaly",
+    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **splenomegaly**.\nReturn only \"Positive\" or \"Negative\"."
+},
+{
+ "condition": "hepatomegaly",
+    "prompt": "You are an expert veterinary radiologist. Determine if the report indicates **hepatomegaly**.\nReturn only \"Positive\" or \"Negative\"."
+}]
